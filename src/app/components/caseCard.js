@@ -76,7 +76,7 @@ const CaseCard = ({ id,title, description,likes,URL }) => {
 };
 
 CaseCard.propTypes = {
-  id: PropTypes.string.isRequired,
+  id: PropTypes.string,
   title: PropTypes.string.isRequired,
   description: PropTypes.string.isRequired,
   likes: PropTypes.number.isRequired,

@@ -10,6 +10,6 @@ export const darkTheme = {
     white: "#FFF",
     pink: "#F86782",
     purple: "#282A36",
-    font: "Fira Sans",
+    font: "Montserrat",
   };
   

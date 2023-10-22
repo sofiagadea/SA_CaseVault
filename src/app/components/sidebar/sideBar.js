@@ -1,8 +1,18 @@
 
+"use client";
 import styled, { css } from "styled-components";
 import { darkTheme } from "../../styles/theme";
 import HomeSidebarButtons from "./HomeSidebarButtons";
 import ProfileSidebarButtons from "./ProfileSidebarButtons";
+import { Mohave } from "next/font/google";
+
+const roboto = Mohave({
+  weight: ["300","400"],
+  syles: ["italic", "normal"],
+  subsets:["latin"],
+}
+);
+
 
 const SidebarWrapper = styled.div`
   position: fixed;
@@ -46,7 +56,7 @@ const SidebarWrapper = styled.div`
   h1 {
     color: #fff;
     font-size: 1.5rem;
-    font-family: ${darkTheme.font}, sans-serif;
+    font-family: ${darkTheme.font};
   }
 
   .icon span {

@@ -2,11 +2,21 @@
 import CaseCard from "./caseCard"; // Asegúrate de importar el componente CaseCard
 import styled from 'styled-components';
 import { darkTheme } from "../styles/theme";
+import Link from 'next/link';
 
 const Wrapper = styled.div`
 flex-grow: 0;
 background-color: ${darkTheme.black}; 
 `
+
+const CaseCardLink = styled.a`
+  color: inherit;
+  text-decoration: none;
+  cursor: pointer;
+  display: block;
+
+`;
+
 const CaseGrid = () => {
   const cases = [
     {
@@ -14,6 +24,7 @@ const CaseGrid = () => {
       title: "Título 1",
       description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed laoreet dui a dui sagittis, eu volutpat velit posuere. Proin auctor convallis elementum. Aliquam accumsan dui quis consectetur facilisis. Fusce faucibus hendrerit magna non pharetra. Phasellus iaculis euismod mauris in molestie. Vivamus vitae ligula justo. Cras felis justo, tincidunt eget libero quis, laoreet rutrum lectus. Nullam id dolor sollicitudin, cursus odio in, varius nisi. Donec odio neque, dignissim sed viverra sit amet, fermentum sed eros. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Sed pretium quam lectus, in finibus sem fringilla quis.",
       likes: 10,
+      URL: "https://www.youtube.com/watch?v=UpWxiU9Cds0&ab_channel=ETICAENLASORGANIZACIONES", 
     },
     {
       id: 2,
@@ -69,12 +80,16 @@ const CaseGrid = () => {
       }}
     >
       {cases.map((caseData) => (
+        <div key={caseData.id}>
+        <CaseCardLink href={`/case-details/${caseData.id}`}>
         <CaseCard
           key={caseData.id}
           title={caseData.title}
           description={caseData.description}
           likes = {caseData.likes}
         />
+        </CaseCardLink>
+        </div>
       ))}
     </div>
     </Wrapper>

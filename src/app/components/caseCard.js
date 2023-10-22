@@ -5,6 +5,35 @@ import { darkTheme } from '../styles/theme';
 import { LikeIcon } from './Icons';
 import 'typeface-quicksand';
 
+const CaseCardContent = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 1rem;
+  align-items: center;
+  min-height: 100%; /* Asegura que el contenido se expanda verticalmente */
+`;
+
+const CaseCardTitle = styled.h2`
+  font-weight: bold;
+  font-size: 2rem;
+  font-weight: bold;
+  margin-top: auto 
+  align-self: flex-start;
+
+`;
+const CaseCardDescription = styled.p`
+  font-size: 0.9rem;
+  max-height: 4.3em;
+  line-height: 1.1em;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
+  font-family: Quicksand;
+`;
+
 const CaseCardWrapper = styled.div`
   background-color: ${darkTheme.grey}; 
   width: a00%;
@@ -22,36 +51,6 @@ const CaseCardWrapper = styled.div`
     background-color: #e0e0e0; /* Cambia el color de fondo al pasar el mouse */
   }
 
-  .case-image {
-    width: 100%;
-    height: auto; /* Esto mantendrá la imagen proporcional al cambiar el ancho */
-    max-height: 100px; /* Ajusta la altura de la imagen según tus necesidades */
-    object-fit: cover;
-    border-radius: 4px;
-  }
-
-  .case-title {
-    font-weight: bold;
-    font-size: 2rem; /* Ajusta el tamaño del título según tus necesidades */
-    margin-top: auto /* Ajusta el espacio superior según tus necesidades */
-    align-self: flex-start;
-
-    
-  }
-
-  .case-description {
-    font-size: 0.9rem;
-    margin-top: -2rem; /* Ajusta el espacio superior de la descripción */
-    overflow: hidden;
-    text-overflow: ellipsis;
-    display: -webkit-box;
-    -webkit-line-clamp: 4;
-    -webkit-box-orient: vertical;
-    max-height: 4.3em;
-    line-height: 1.1em;
-    font-family: Quicksand;
-  }
-
   .icon{
     display: flex;
     align-items: left;
@@ -59,23 +58,29 @@ const CaseCardWrapper = styled.div`
   }
 `;
 
-const CaseCard = ({ title, description,likes }) => {
+const CaseCard = ({ id,title, description,likes,URL }) => {
   return (
+    
     <CaseCardWrapper>
-      <h2 className="case-title">{title}</h2>
-      <p className="case-description">{description}</p>
-      <div className="icon">
-          <LikeIcon />
-          <p> {likes}</p>
-    </div>
+      <CaseCardContent>
+        <CaseCardTitle>{title}</CaseCardTitle>
+        <CaseCardDescription>{description}</CaseCardDescription>
+        <div className="icon">
+            <LikeIcon />
+            <p>{likes}</p>
+          </div>
+      </CaseCardContent>
     </CaseCardWrapper>
+   
   );
 };
 
 CaseCard.propTypes = {
+  id: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
   description: PropTypes.string.isRequired,
   likes: PropTypes.number.isRequired,
+  URL: PropTypes.string,
 };
 
 export default CaseCard;

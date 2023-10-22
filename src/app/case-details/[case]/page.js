@@ -1,7 +1,7 @@
 "use client";
 
 
-const CaseGrid = () => {
+const CaseLoad = (id) => {
     const cases = {
       1: {
         id: 1,
@@ -53,13 +53,30 @@ const CaseGrid = () => {
         likes: 2,
       },
     };
+    const selectedCase = cases[id];
+    if (!selectedCase) {
+      return <div>El caso con ID {id} no se encontró.</div>;
+    }
+    return(
+      selectedCase
+    )
 }
 
-function CaseDetails() {
-   
-    return(
-        <p> hola</p>
-    )
-};
+function CaseDetails({ params }) {
+  const { case: id } = params; // El parámetro debería llamarse 'case' en tu ruta dinámica.
+  const selectedCase = CaseLoad(id);
+
+  if (!selectedCase) {
+    return <div>El caso con ID {id} no se encontró.</div>;
+  }
+
+  return (
+    <div>
+      <h2>{selectedCase.title}</h2>
+      <p>{selectedCase.description}</p>
+      <p>Likes: {selectedCase.likes}</p>
+    </div>
+  );
+}
 
 export default CaseDetails;

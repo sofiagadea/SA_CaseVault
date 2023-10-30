@@ -46,7 +46,7 @@ function CaseDetails({ params }) {
           <p>{selectedCase.video}</p>
           <p>Likes: {selectedCase.likes}</p>
         </>
-      )};
+      )}
     </div>
   );
 }

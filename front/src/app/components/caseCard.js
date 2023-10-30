@@ -58,13 +58,14 @@ const CaseCardWrapper = styled.div`
   }
 `;
 
-const CaseCard = ({ id,title, description,likes,URL }) => {
+const CaseCard = ({ id,title, description,likes, video }) => {
   return (
     
     <CaseCardWrapper>
       <CaseCardContent>
         <CaseCardTitle>{title}</CaseCardTitle>
         <CaseCardDescription>{description}</CaseCardDescription>
+        <CaseCardDescription>{video}</CaseCardDescription>
         <div className="icon">
             <LikeIcon />
             <p>{likes}</p>
@@ -80,7 +81,7 @@ CaseCard.propTypes = {
   title: PropTypes.string.isRequired,
   description: PropTypes.string.isRequired,
   likes: PropTypes.number.isRequired,
-  URL: PropTypes.string,
+  url: PropTypes.string,
 };
 
 export default CaseCard;

@@ -1,80 +1,52 @@
 "use client";
+import React, { useEffect, useState } from "react";
+import axios from 'axios';
 
-
-const CaseLoad = (id) => {
-    const cases = {
-      1: {
-        id: 1,
-        title: "Título 1",
-        description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed laoreet dui a dui sagittis, eu volutpat velit posuere. Proin auctor convallis elementum. Aliquam accumsan dui quis consectetur facilisis. Fusce faucibus hendrerit magna non pharetra. Phasellus iaculis euismod mauris in molestie. Vivamus vitae ligula justo. Cras felis justo, tincidunt eget libero quis, laoreet rutrum lectus. Nullam id dolor sollicitudin, cursus odio in, varius nisi. Donec odio neque, dignissim sed viverra sit amet, fermentum sed eros. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Sed pretium quam lectus, in finibus sem fringilla quis.",
-        likes: 10,
-        URL: "https://www.youtube.com/watch?v=UpWxiU9Cds0&ab_channel=ETICAENLASORGANIZACIONES", 
-      },
-      2: {
-        id: 2,
-        title: "Título 2",
-        description: "Proin scelerisque lorem urna, et rutrum metus iaculis eu. Etiam consequat magna nec fermentum suscipit. Aliquam id placerat libero. Nunc pharetra molestie egestas. Nam diam felis, consectetur ac congue in, dictum vel felis. Vivamus aliquam convallis luctus. Fusce tempor tincidunt vehicula. Praesent vestibulum suscipit efficitur. Nunc congue felis at sem porttitor feugiat.",
-        likes: 2,
-      },
-      3: {
-        id: 3,
-        title: "Título 3",
-        description: "Proin scelerisque lorem urna, et rutrum metus iaculis eu. Etiam consequat magna nec fermentum suscipit. Aliquam id placerat libero. Nunc pharetra molestie egestas. Nam diam felis, consectetur ac congue in, dictum vel felis. Vivamus aliquam convallis luctus. Fusce tempor tincidunt vehicula. Praesent vestibulum suscipit efficitur. Nunc congue felis at sem porttitor feugiat.",
-        likes: 0,
-      },
-      4: {
-        id: 4,
-        title: "Título 4",
-        description: "Proin scelerisque lorem urna, et rutrum metus iaculis eu. Etiam consequat magna nec fermentum suscipit. Aliquam id placerat libero. Nunc pharetra molestie egestas. Nam diam felis, consectetur ac congue in, dictum vel felis. Vivamus aliquam convallis luctus. Fusce tempor tincidunt vehicula. Praesent vestibulum suscipit efficitur. Nunc congue felis at sem porttitor feugiat.",
-        likes: 30,
-      },
-     5:  {
-        id: 5,
-        title: "Título 5",
-        description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed laoreet dui a dui sagittis, eu volutpat velit posuere. Proin auctor convallis elementum. Aliquam accumsan dui quis consectetur facilisis. Fusce faucibus hendrerit magna non pharetra. Phasellus iaculis euismod mauris in molestie. Vivamus vitae ligula justo. Cras felis justo, tincidunt eget libero quis, laoreet rutrum lectus. Nullam id dolor sollicitudin, cursus odio in, varius nisi. Donec odio neque, dignissim sed viverra sit amet, fermentum sed eros. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Sed pretium quam lectus, in finibus sem fringilla quis.",
-        likes: 20,
-      },
-      6: {
-        id: 6,
-        title: "Título 6",
-        description: "Proin scelerisque lorem urna, et rutrum metus iaculis eu. Etiam consequat magna nec fermentum suscipit. Aliquam id placerat libero. Nunc pharetra molestie egestas. Nam diam felis, consectetur ac congue in, dictum vel felis. Vivamus aliquam convallis luctus. Fusce tempor tincidunt vehicula. Praesent vestibulum suscipit efficitur. Nunc congue felis at sem porttitor feugiat.",
-        likes: 6,
-      },
-      7: {
-        id: 7,
-        title: "Título 7",
-        description: "Proin scelerisque lorem urna, et rutrum metus iaculis eu. Etiam consequat magna nec fermentum suscipit. Aliquam id placerat libero. Nunc pharetra molestie egestas. Nam diam felis, consectetur ac congue in, dictum vel felis. Vivamus aliquam convallis luctus. Fusce tempor tincidunt vehicula. Praesent vestibulum suscipit efficitur. Nunc congue felis at sem porttitor feugiat.",
-        likes: 3,
-      },
-      8: {
-        id: 8,
-        title: "Título 8",
-        description: "Proin scelerisque lorem urna, et rutrum metus iaculis eu. Etiam consequat magna nec fermentum suscipit. Aliquam id placerat libero. Nunc pharetra molestie egestas. Nam diam felis, consectetur ac congue in, dictum vel felis. Vivamus aliquam convallis luctus. Fusce tempor tincidunt vehicula. Praesent vestibulum suscipit efficitur. Nunc congue felis at sem porttitor feugiat.",
-        likes: 2,
-      },
-    };
-    const selectedCase = cases[id];
-    if (!selectedCase) {
-      return <div>El caso con ID {id} no se encontró.</div>;
-    }
-    return(
-      selectedCase
-    )
+async function fetchCaseData(id) {
+  const API_URL = `http://127.0.0.1:3000/api/v1/cases/${id}`;
+  try {
+      const response = await axios.get(API_URL);
+      return response.data;
+  } catch (error) {
+      console.error("Error fetching case data:", error);
+      return false;
+  }
 }
 
 function CaseDetails({ params }) {
-  const { case: id } = params; // El parámetro debería llamarse 'case' en tu ruta dinámica.
-  const selectedCase = CaseLoad(id);
+  const { case: id } = params;
+  const [selectedCase, setSelectedCase] = useState(null);
+  useEffect(() => {
+    const fetchData = async () => {
+      const caseData = await fetchCaseData(id);
+      setSelectedCase(caseData);
+    };
+
+    fetchData();
+  }, [id]);
 
   if (!selectedCase) {
-    return <div>El caso con ID {id} no se encontró.</div>;
+    return <div>Cargando..</div>;
   }
 
   return (
     <div>
-      <h2>{selectedCase.title}</h2>
-      <p>{selectedCase.description}</p>
-      <p>Likes: {selectedCase.likes}</p>
+      {Array.isArray(selectedCase) ? (
+        selectedCase.map((caseItem) => (
+          <div key={caseItem.id}>
+            <h2>{caseItem.title}</h2>
+            <p>{caseItem.description}</p>
+            <p>Likes: {caseItem.likes}</p>
+          </div>
+        ))
+      ) : (
+        <>
+          <h2>{selectedCase.title}</h2>
+          <p>{selectedCase.description}</p>
+          <p>{selectedCase.video}</p>
+          <p>Likes: {selectedCase.likes}</p>
+        </>
+      )};
     </div>
   );
 }

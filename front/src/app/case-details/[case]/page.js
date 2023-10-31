@@ -13,13 +13,6 @@ const Line = styled.div`
   margin-bottom: 20px;
 `;
 
-const defaultCase = {
-  title: "Caso Volkswagen",
-  description: "El escándalo de la Volkswagen estalló en septiembre de 2015, cuando la compañía admitió que casi 600.000 coches vendidos en Estados Unidos tenían instalado un software diseñado para cambiar los resultados de las pruebas de emisiones contaminantes de motores diesel.",
-  likes: 0,
-  videoUrl: "https://www.youtube.com/embed/UpWxiU9Cds0?si=ERoLASLcyQZjszfW",
-};
-
 async function fetchCaseData(id) {
   const API_URL = `http://127.0.0.1:3000/api/v1/cases/${id}`;
   try {
@@ -27,7 +20,7 @@ async function fetchCaseData(id) {
     return response.data;
   } catch (error) {
     console.error("Error fetching case data:", error);
-    return defaultCase; 
+    return null; 
   }
 }
 
@@ -64,18 +57,16 @@ function CaseDetails({ params }) {
       <Line />
       <p>{selectedCase.description}</p>
       <div className="video-container">
-        
-        <div className="ratio ratio-1x1">
-          
-          <iframe
-            width="210"
-            height="118"
-            src={selectedCase.video}
-            title="YouTube video player"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-            allowFullScreen
-          ></iframe>
-        </div>
+          <div className="ratio ratio-1x1">
+              <iframe
+                  width="210"
+                  height="118"
+                  src={selectedCase.video}
+                  title="YouTube video player"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                  allowFullScreen
+              ></iframe>
+          </div>
       </div>
       <p>Likes: {selectedCase.likes}</p>
     </div>

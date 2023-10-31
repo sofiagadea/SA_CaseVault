@@ -14,17 +14,15 @@ export default function Home() {
   
       <div className="container">
         <div className="menu-container">
-          <div className="sidebar-container">
+          <div className="sidebar-container"> 
             <Sidebar currentPage="home" />
           </div>
           <div className="casegrid-container">
             <CaseGrid />
+            lesgo
           </div>
         </div>
       </div>
-      
-
-       
     </div>
   
   )

@@ -1,13 +1,14 @@
-FROM node:latest
+# BASE
+FROM node:latest AS base
 
 WORKDIR /app
 
-COPY package.json package-lock.json ./
-
 COPY . .
+EXPOSE 3000
+
+# DEVELOPMENT
+FROM base AS dev
 
 RUN npm install
-
-EXPOSE 3000
 
 CMD ["npm", "run", "dev"]

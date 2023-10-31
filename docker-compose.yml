@@ -11,5 +11,10 @@ services:
     build:
       context: ./front
       dockerfile: Dockerfile
+      target: dev
+    volumes:
+      - ./front/src:/app/src
+      - ./front/public:/app/public
+      - ./front/package.json:/app/package.json
     ports:
       - "3001:3000"

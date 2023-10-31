@@ -5,3 +5,20 @@
 #
 #   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
 #   Character.create(name: "Luke", movie: movies.first)
+
+cases = Case.create([{
+    title: "title 1",
+    description: "description 1",
+    video: "video 1",
+    },
+    {
+    title: "title 2",
+    description: "description 2",
+    video: "video 2"
+    },
+    {
+    title: "title 3",
+    description: "description 3",
+    video: "video 3"
+    },
+])

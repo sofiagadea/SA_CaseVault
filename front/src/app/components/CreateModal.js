@@ -6,7 +6,7 @@ import Modal from 'react-bootstrap/Modal';
 import { UploadIcon } from './Icons';
 import axios from 'axios';
 
-const API_URL = "http://127.0.0.1:3000/api/v1/cases";
+const API_URL = "http://casevault-lb-1054477253.us-east-1.elb.amazonaws.com:3000/api/v1/cases";
 
 function CreateModal() {
   const [show, setShow] = useState(false);

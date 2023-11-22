@@ -17,4 +17,4 @@ services:
       - ./front/public:/app/public
       - ./front/package.json:/app/package.json
     ports:
-      - "3001:3000"
+      - "3001:3001"

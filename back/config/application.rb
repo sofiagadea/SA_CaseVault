@@ -10,6 +10,7 @@ module CaseVault
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 7.0
+    config.hosts << "casevault-lb-1054477253.us-east-1.elb.amazonaws.com:3000"
 
     # Configuration for the application, engines, and railties goes here.
     #

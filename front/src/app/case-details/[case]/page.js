@@ -14,7 +14,7 @@ const Line = styled.div`
 `;
 
 async function fetchCaseData(id) {
-  const API_URL = `http://127.0.0.1:3000/api/v1/cases/${id}`;
+  const API_URL = `http://casevault-lb-1054477253.us-east-1.elb.amazonaws.com:3000/api/v1/cases/${id}`;
   try {
     const response = await axios.get(API_URL);
     return response.data;

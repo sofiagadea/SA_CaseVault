@@ -19,7 +19,6 @@ export default function Home() {
           </div>
           <div className="casegrid-container">
             <CaseGrid />
-            lesgo
           </div>
         </div>
       </div>

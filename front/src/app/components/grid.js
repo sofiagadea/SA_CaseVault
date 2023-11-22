@@ -6,7 +6,7 @@ import { darkTheme } from "../styles/theme";
 import axios from 'axios';
 import Link from 'next/link';
 
-const API_URL = 'http://127.0.0.1:3000/api/v1/cases';
+const API_URL = 'http://casevault-lb-1054477253.us-east-1.elb.amazonaws.com:3000/api/v1/cases';
 
 const Wrapper = styled.div`
 flex-grow: 0;

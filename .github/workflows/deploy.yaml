@@ -63,7 +63,7 @@ jobs:
         AWS_DEFAULT_REGION: us-east-1
       run: |
         GITHUB_SHA=$(git rev-parse HEAD)
-        sed -i "s/GITHUB_SHA/${GITHUB_SHA}/" /front/front-taskdefinition.json
+        sed -i "s/GITHUB_SHA/${GITHUB_SHA}/" front/front-taskdefinition.json
         aws ecs register-task-definition --cli-input-json file://front/front-taskdefinition.json
         
     - name: Actualizar definición de tarea en ECS - Backend
@@ -74,5 +74,5 @@ jobs:
         AWS_DEFAULT_REGION: us-east-1
       run: |
         GITHUB_SHA=$(git rev-parse HEAD)
-        sed -i "s/GITHUB_SHA/${GITHUB_SHA}/" ./back/back-taskdefinition.json
+        sed -i "s/GITHUB_SHA/${GITHUB_SHA}/" back/back-taskdefinition.json
         aws ecs register-task-definition --cli-input-json file://back/back-taskdefinition.json

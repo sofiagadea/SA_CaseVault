@@ -9,6 +9,6 @@ EXPOSE 3001
 # DEVELOPMENT
 FROM base AS dev
 
-RUN npm install
+RUN npm install && npm run build
 
 CMD ["npm", "start"]

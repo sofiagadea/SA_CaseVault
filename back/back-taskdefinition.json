@@ -46,5 +46,10 @@
         "cpuArchitecture": "X86_64",
         "operatingSystemFamily": "LINUX"
     },
-    "tags": []
+    "tags": [
+        {
+            "key": "label",
+            "value": "value"
+        }
+    ]
 }

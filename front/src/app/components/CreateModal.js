@@ -7,6 +7,9 @@ import { UploadIcon } from './Icons';
 import axios from 'axios';
 
 const API_URL = "http://casevault-lb-1054477253.us-east-1.elb.amazonaws.com:3000/api/v1/cases";
+let api = axios.create({
+  baseURL: API_URL,
+});
 
 function CreateModal() {
   const [show, setShow] = useState(false);
@@ -30,7 +33,7 @@ function CreateModal() {
       formDataToSend.append("title", formData.title);
       formDataToSend.append("description", formData.description);
       formDataToSend.append("video", formData.video );
-      const response = await axios.post(API_URL, { case: formData });
+      const response = await api.post("http://casevault-lb-1054477253.us-east-1.elb.amazonaws.com:3000/api/v1/cases", { case: formData });
       console.log(API_URL);
       console.log("Solicitud POST exitosa:", response.data);
 

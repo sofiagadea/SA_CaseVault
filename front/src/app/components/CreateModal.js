@@ -31,7 +31,7 @@ function CreateModal() {
       formDataToSend.append("description", formData.description);
       formDataToSend.append("video", formData.video );
       const response = await axios.post(API_URL, { case: formData });
-
+      console.log(API_URL);
       console.log("Solicitud POST exitosa:", response.data);
 
       handleClose();

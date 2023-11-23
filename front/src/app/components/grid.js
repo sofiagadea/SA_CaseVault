@@ -21,6 +21,7 @@ const CaseCardLink = styled.a`
 `;
 
 function CaseGrid(){
+  console.log(API_URL);
   const [cases, setCases] = useState([]);
 
   useEffect(() => {

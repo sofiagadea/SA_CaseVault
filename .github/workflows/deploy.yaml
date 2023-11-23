@@ -42,10 +42,10 @@ jobs:
         docker tag sa_casevault-case-vault-front:latest ${{ secrets.AWS_REPO_URI }}/casevault-front:${IMAGE_TAG}
         docker tag sa_casevault-case-vault-back:latest ${{ secrets.AWS_REPO_URI }}/casevault-back:${IMAGE_TAG}
         docker images
-        docker push ${{ secrets.AWS_REPO_URI }}/sa_casevault-front:${IMAGE_TAG}
-        docker push ${{ secrets.AWS_REPO_URI }}/sa_casevault-back:${IMAGE_TAG}
+        docker push ${{ secrets.AWS_REPO_URI }}/casevault-front:${IMAGE_TAG}
+        docker push ${{ secrets.AWS_REPO_URI }}/casevault-back:${IMAGE_TAG}
         echo "build and push done"
-
+        
   deploy:
     runs-on: ubuntu-latest
   

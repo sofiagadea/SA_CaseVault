@@ -1,4 +1,5 @@
 {
+    "taskDefinitionArn": "arn:aws:ecs:us-east-1:780539339462:task-definition/back-taskdefinition:GITHUB_SHA",
     "containerDefinitions": [
         {
             "name": "back",

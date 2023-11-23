@@ -1,4 +1,5 @@
 {
+    "taskDefinitionArn": "arn:aws:ecs:us-east-1:780539339462:task-definition/front-taskdefinition:GITHUB_SHA",
     "containerDefinitions": [
         {
             "name": "front",

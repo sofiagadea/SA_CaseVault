@@ -64,7 +64,7 @@ jobs:
       run: |
         GITHUB_SHA=$(git rev-parse HEAD)
         sed -i "s/GITHUB_SHA/${GITHUB_SHA}/" front/front-taskdefinition.json
-        aws ecs register-task-definition --cli-input-json file://front/front-taskdefinition.json
+        aws ecs register-task-definition --cli-input-json file://front/front-taskdefinition.json --family front-taskdefinition --revision GITHUB_SHA
         
     - name: Actualizar definición de tarea en ECS - Backend
       env:

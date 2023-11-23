@@ -82,11 +82,14 @@ jobs:
         ECS_CLUSTER: casevault-cluster
         ECS_SERVICE: casevault-front
       run: |
-        aws ecs update-service --cluster $ECS_CLUSTER --service $ECS_SERVICE --task-definition front-taskdefinition:$IMAGE_TAG
+        latest_revision=$(aws ecs describe-task-definition --task-definition front-taskdefinition --query 'taskDefinition.revision' --output text)
+        aws ecs update-service --cluster ${ECS_CLUSTER} --service ${ECS_SERVICE} --task-definition front-taskdefinition:$latest_revision
         
     - name: Update ECS Service - Backend
       env:
         ECS_CLUSTER: casevault-cluster
         ECS_SERVICE: casevault-back
       run: |
-        aws ecs update-service --cluster $ECS_CLUSTER --service $ECS_SERVICE --task-definition back-taskdefinition:$IMAGE_TAG
+        latest_revision=$(aws ecs describe-task-definition --task-definition back-taskdefinition --query 'taskDefinition.revision' --output text)
+        aws ecs update-service --cluster ${ECS_CLUSTER} --service ${ECS_SERVICE} --task-definition back-taskdefinition:$latest_revision
+  

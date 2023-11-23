@@ -3,8 +3,8 @@ FROM node:latest AS base
 
 WORKDIR /app
 
-COPY package.json .
-COPY package-lock.json .
+COPY front/package.json .
+COPY front/package-lock.json .
 
 COPY . .
 EXPOSE 3001

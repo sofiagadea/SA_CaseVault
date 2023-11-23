@@ -39,11 +39,11 @@ jobs:
         docker build -t sa_casevault-case-vault-front:latest -f front/Dockerfile ./front
         docker build -t sa_casevault-case-vault-back:latest -f back/Dockerfile ./back
         docker images
-        docker tag sa_casevault-case-vault-front:latest ${{ secrets.AWS_REPO_URI }}:front_${IMAGE_TAG}
-        docker tag sa_casevault-case-vault-back:latest ${{ secrets.AWS_REPO_URI }}:back_${IMAGE_TAG}
+        docker tag sa_casevault-case-vault-front:latest ${{ secrets.AWS_REPO_URI }}:front-${IMAGE_TAG}
+        docker tag sa_casevault-case-vault-back:latest ${{ secrets.AWS_REPO_URI }}:back-${IMAGE_TAG}
         docker images
-        docker push ${{ secrets.AWS_REPO_URI }}:front_${IMAGE_TAG}
-        docker push ${{ secrets.AWS_REPO_URI }}:back_${IMAGE_TAG}
+        docker push ${{ secrets.AWS_REPO_URI }}:front-${IMAGE_TAG}
+        docker push ${{ secrets.AWS_REPO_URI }}:back-${IMAGE_TAG}
         echo "build and push done"
 
   deploy:

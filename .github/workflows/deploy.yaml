@@ -83,6 +83,7 @@ jobs:
         ECS_SERVICE: casevault-front
       run: |
         latest_revision=$(aws ecs describe-task-definition --task-definition front-taskdefinition --query 'taskDefinition.revision' --output text)
+        echo "Latest Revision: $latest_revision"
         aws ecs update-service --cluster ${ECS_CLUSTER} --service ${ECS_SERVICE} --task-definition front-taskdefinition:$latest_revision
         
     - name: Update ECS Service - Backend
@@ -91,5 +92,6 @@ jobs:
         ECS_SERVICE: casevault-back
       run: |
         latest_revision=$(aws ecs describe-task-definition --task-definition back-taskdefinition --query 'taskDefinition.revision' --output text)
+        echo "Latest Revision: $latest_revision"
         aws ecs update-service --cluster ${ECS_CLUSTER} --service ${ECS_SERVICE} --task-definition back-taskdefinition:$latest_revision
   

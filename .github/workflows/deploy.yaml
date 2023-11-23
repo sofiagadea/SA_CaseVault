@@ -63,7 +63,7 @@ jobs:
         AWS_DEFAULT_REGION: us-east-1
       run: |
         GITHUB_SHA=$(git rev-parse HEAD)
-        sed -i "s/GITHUB_SHA/${GITHUB_SHA}/" front-taskdefinition.json
+        sed -i "s/GITHUB_SHA/${GITHUB_SHA}/" ./front/front-taskdefinition.json
         aws ecs register-task-definition --cli-input-json file:./front/front-taskdefinition.json
         front/front-taskdefinition.json
         
@@ -76,5 +76,5 @@ jobs:
         AWS_DEFAULT_REGION: us-east-1
       run: |
         GITHUB_SHA=$(git rev-parse HEAD)
-        sed -i "s/GITHUB_SHA/${GITHUB_SHA}/" back-taskdefinition.json
+        sed -i "s/GITHUB_SHA/${GITHUB_SHA}/" ./back/back-taskdefinition.json
         aws ecs register-task-definition --cli-input-json file:./back/back-taskdefinition.json

@@ -2,7 +2,7 @@
     "containerDefinitions": [
         {
             "name": "front",
-            "image": "780539339462.dkr.ecr.us-east-1.amazonaws.com/casevault:$front_{IMAGE_TAG}",
+            "image": "780539339462.dkr.ecr.us-east-1.amazonaws.com/casevault:front_${IMAGE_TAG}",
             "cpu": 0,
             "portMappings": [
                 {

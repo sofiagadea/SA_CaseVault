@@ -64,8 +64,7 @@ jobs:
       run: |
         GITHUB_SHA=$(git rev-parse HEAD)
         sed -i "s/GITHUB_SHA/${GITHUB_SHA}/" front/front-taskdefinition.json
-        aws ecs register-task-definition --cli-input-json file://front/front-taskdefinition.json --family front-taskdefinition --revision GITHUB_SHA
-        
+        aws ecs register-task-definition --cli-input-json file://front/front-taskdefinition.json
     - name: Actualizar definición de tarea en ECS - Backend
       env:
         IMAGE_TAG: ${{ github.sha }}
@@ -79,14 +78,15 @@ jobs:
 
     - name: Update ECS Service - Frontend
       env:
+        IMAGE_TAG: ${{ github.sha }}
         ECS_CLUSTER: casevault-cluster
         ECS_SERVICE: casevault-front
       run: |
-        aws ecs update-service --cluster $ECS_CLUSTER --service $ECS_SERVICE --task-definition front-taskdefinition:${GITHUB_SHA}
+        aws ecs update-service --cluster $ECS_CLUSTER --service $ECS_SERVICE --task-definition front-taskdefinition:$IMAGE_TAG
         
     - name: Update ECS Service - Backend
       env:
         ECS_CLUSTER: casevault-cluster
         ECS_SERVICE: casevault-back
       run: |
-        aws ecs update-service --cluster $ECS_CLUSTER --service $ECS_SERVICE --task-definition back-taskdefinition:${GITHUB_SHA}
+        aws ecs update-service --cluster $ECS_CLUSTER --service $ECS_SERVICE --task-definition back-taskdefinition:$IMAGE_TAG

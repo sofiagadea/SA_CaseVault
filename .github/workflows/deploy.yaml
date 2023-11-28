@@ -81,6 +81,7 @@ jobs:
         IMAGE_TAG: ${{ github.sha }}
         ECS_CLUSTER: casevault-cluster
         ECS_SERVICE: casevault-front
+        AWS_EC2_METADATA_DISABLED: true
       run: |
         aws ecs update-service --cluster ${ECS_CLUSTER} --service ${ECS_SERVICE} --force-new-deployment
         
@@ -88,5 +89,6 @@ jobs:
       env:
         ECS_CLUSTER: casevault-cluster
         ECS_SERVICE: casevault-back
+        AWS_EC2_METADATA_DISABLED: true
       run: |
         aws ecs update-service --cluster ${ECS_CLUSTER} --service ${ECS_SERVICE} --force-new-deployment

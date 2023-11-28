@@ -8,7 +8,7 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    
+
     steps:
 
     - name: Debug - Print Image Name
@@ -16,6 +16,7 @@ jobs:
         echo "AWS_REPO_URI=${{ secrets.AWS_REPO_URI }}"
         echo "GITHUB_SHA=${{ github.sha }}"
         echo "Full Image Name=${{ secrets.AWS_REPO_URI }}:${{ github.sha }}"
+
 
     - name: Checkout código fuente
       uses: actions/checkout@v2
@@ -64,7 +65,6 @@ jobs:
         GITHUB_SHA=$(git rev-parse HEAD)
         sed -i "s/GITHUB_SHA/${GITHUB_SHA}/" front/front-taskdefinition.json
         aws ecs register-task-definition --cli-input-json file://front/front-taskdefinition.json
-
     - name: Actualizar definición de tarea en ECS - Backend
       env:
         IMAGE_TAG: ${{ github.sha }}
@@ -76,26 +76,6 @@ jobs:
         sed -i "s/GITHUB_SHA/${GITHUB_SHA}/" back/back-taskdefinition.json
         aws ecs register-task-definition --cli-input-json file://back/back-taskdefinition.json
 
-    - name: Obtener definición de tarea ECS - Frontend
-      env:
-        AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-        AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-        AWS_DEFAULT_REGION: us-east-1
-      run: |
-        GITHUB_SHA=$(git rev-parse HEAD)
-        task_definition_arn=$(aws ecs describe-task-definition --task-definition sa_casevault-case-vault-front:latest | jq -r '.taskDefinition.taskDefinitionArn')
-        aws ecs describe-task-definition --task-definition $task_definition_arn > ecs-front-taskdefinition.json
-      
-    - name: Obtener definición de tarea ECS - Backend
-      env:
-        AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-        AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-        AWS_DEFAULT_REGION: us-east-1
-      run: |
-        GITHUB_SHA=$(git rev-parse HEAD)
-        task_definition_arn=$(aws ecs describe-task-definition --task-definition sa_casevault-case-vault-back:latest | jq -r '.taskDefinition.taskDefinitionArn')
-        aws ecs describe-task-definition --task-definition $task_definition_arn > ecs-back-taskdefinition.json
-        
     - name: Update ECS Service - Frontend
       env:
         IMAGE_TAG: ${{ github.sha }}

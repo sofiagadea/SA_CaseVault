@@ -89,4 +89,4 @@ jobs:
         ECS_CLUSTER: casevault-cluster
         ECS_SERVICE: casevault-back
       run: |
-        aws ecs update-service --cluster ${ECS_CLUSTER} --service ${ECS_SERVICE} --force-new-depolyment
+        aws ecs update-service --cluster ${ECS_CLUSTER} --service ${ECS_SERVICE} "--force-new-depolyment"

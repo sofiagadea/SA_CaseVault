@@ -21,6 +21,7 @@ export default function HomePage() {
       <div className="container">      
       <div className="casegrid-container">
             <CaseGrid />
+            
           </div>  
         </div>
     </div>

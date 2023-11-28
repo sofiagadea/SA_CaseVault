@@ -17,7 +17,6 @@ jobs:
         echo "GITHUB_SHA=${{ github.sha }}"
         echo "Full Image Name=${{ secrets.AWS_REPO_URI }}:${{ github.sha }}"
 
-
     - name: Checkout código fuente
       uses: actions/checkout@v2
 

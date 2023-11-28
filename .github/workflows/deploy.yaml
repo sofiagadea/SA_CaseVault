@@ -86,6 +86,7 @@ jobs:
         task_definition_family="front-taskdefinition"  # Use the family name here
         task_definition_arn=$(aws ecs describe-task-definition --task-definition $task_definition_family --query 'taskDefinition.taskDefinitionArn' --output text)
         aws ecs describe-task-definition --task-definition $task_definition_arn > ecs-front-taskdefinition.json
+        cat ecs-front-taskdefinition.json
         
     - name: Obtener definición de tarea ECS - Backend
       env:
@@ -97,6 +98,7 @@ jobs:
         task_definition_family="back-taskdefinition"  # Use the family name here
         task_definition_arn=$(aws ecs describe-task-definition --task-definition $task_definition_family --query 'taskDefinition.taskDefinitionArn' --output text)
         aws ecs describe-task-definition --task-definition $task_definition_arn > ecs-back-taskdefinition.json
+        cat ecs-back-taskdefinition.json
 
     - name: Update ECS Service - Frontend
       env:

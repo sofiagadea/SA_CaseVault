@@ -95,6 +95,7 @@ jobs:
         GITHUB_SHA=$(git rev-parse HEAD)
         task_definition_arn=$(aws ecs describe-task-definition --task-definition sa_casevault-case-vault-back:latest | jq -r '.taskDefinition.taskDefinitionArn')
         aws ecs describe-task-definition --task-definition $task_definition_arn > ecs-back-taskdefinition.json
+        
     - name: Update ECS Service - Frontend
       env:
         IMAGE_TAG: ${{ github.sha }}

@@ -10,11 +10,13 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+
     - name: Debug - Print Image Name
       run: |
         echo "AWS_REPO_URI=${{ secrets.AWS_REPO_URI }}"
         echo "GITHUB_SHA=${{ github.sha }}"
         echo "Full Image Name=${{ secrets.AWS_REPO_URI }}:${{ github.sha }}"
+
 
     - name: Checkout código fuente
       uses: actions/checkout@v2
@@ -61,9 +63,8 @@ jobs:
         AWS_DEFAULT_REGION: us-east-1
       run: |
         GITHUB_SHA=$(git rev-parse HEAD)
-        jq --arg newTag $IMAGE_TAG '.containerDefinitions[0].image |= sub("-GITHUB_SHA$"; "-$newTag")' front/front-taskdefinition.json > front/front-taskdefinition-updated.json
-        aws ecs register-task-definition --cli-input-json file://front/front-taskdefinition-updated.json
-
+        sed -i "s/GITHUB_SHA/${GITHUB_SHA}/" front/front-taskdefinition.json
+        aws ecs register-task-definition --cli-input-json file://front/front-taskdefinition.json
     - name: Actualizar definición de tarea en ECS - Backend
       env:
         IMAGE_TAG: ${{ github.sha }}
@@ -72,8 +73,8 @@ jobs:
         AWS_DEFAULT_REGION: us-east-1
       run: |
         GITHUB_SHA=$(git rev-parse HEAD)
-        jq --arg newTag $IMAGE_TAG '.containerDefinitions[0].image |= sub("-GITHUB_SHA$"; "-$newTag")' back/back-taskdefinition.json > back/back-taskdefinition-updated.json
-        aws ecs register-task-definition --cli-input-json file://back/back-taskdefinition-updated.json
+        sed -i "s/GITHUB_SHA/${GITHUB_SHA}/" back/back-taskdefinition.json
+        aws ecs register-task-definition --cli-input-json file://back/back-taskdefinition.json
 
     - name: Update ECS Service - Frontend
       env:

@@ -95,7 +95,7 @@ const Navbar = () => {
       <Link href="/home">
       <div className="logo flex-row">
         <span>
-        CaseVault
+        CaseVault!!
         </span>
       </div>
       </Link>

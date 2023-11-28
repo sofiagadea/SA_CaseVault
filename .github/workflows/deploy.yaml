@@ -91,6 +91,6 @@ jobs:
         ECS_CLUSTER: casevault-cluster
         ECS_SERVICE: casevault-back
         AWS_EC2_METADATA_DISABLED: true
-        REGION: us-east-1
+        REGION: us-east-1 
       run: |
         aws ecs update-service --cluster ${ECS_CLUSTER} --service ${ECS_SERVICE} --force-new-deployment

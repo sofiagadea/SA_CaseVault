@@ -82,11 +82,11 @@ jobs:
         ECS_CLUSTER: casevault-cluster
         ECS_SERVICE: casevault-front
       run: |
-        aws ecs update-service --cluster ${ECS_CLUSTER} --service ${ECS_SERVICE} "--force-new-depolyment"
+        aws ecs update-service --cluster ${ECS_CLUSTER} --service ${ECS_SERVICE} --force-new-deployment
         
     - name: Update ECS Service - Backend
       env:
         ECS_CLUSTER: casevault-cluster
         ECS_SERVICE: casevault-back
       run: |
-        aws ecs update-service --cluster ${ECS_CLUSTER} --service ${ECS_SERVICE} "--force-new-depolyment"
+        aws ecs update-service --cluster ${ECS_CLUSTER} --service ${ECS_SERVICE} --force-new-deployment
